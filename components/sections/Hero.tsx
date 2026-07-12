@@ -27,7 +27,7 @@ export default function Hero() {
     <section
       id="top"
       ref={ref}
-      className="relative flex min-h-svh flex-col justify-center overflow-hidden px-5 sm:px-8"
+      className="relative flex min-h-[86svh] flex-col justify-center overflow-hidden px-5 pt-24 pb-16 sm:px-8"
     >
       {/* Cinematic letterbox bars — subtle movie framing. */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[8svh] bg-gradient-to-b from-bg to-transparent" />

@@ -14,7 +14,7 @@ export default function SectionHeading({
   coord?: string;
 }) {
   return (
-    <Reveal className="mb-10 flex items-end gap-4 sm:mb-14">
+    <Reveal className="mb-7 flex items-end gap-4 sm:mb-9">
       <h2 className="text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-[0.95]">{title}</h2>
       <span aria-hidden className="mb-2 h-px flex-1 bg-line" />
       {coord && (

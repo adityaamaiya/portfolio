@@ -81,6 +81,32 @@ body {
   line-height: 1.6;
 }
 
+/* Ambient depth so the background isn't flat black — two faint brand glows
+   (cold violet top-right, warm amber bottom-left) fixed behind everything. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      55rem 40rem at 88% -8%,
+      color-mix(in oklch, var(--primary) 14%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      45rem 38rem at -8% 108%,
+      color-mix(in oklch, var(--accent) 9%, transparent),
+      transparent 60%
+    );
+}
+
+/* Section rhythm — a hairline between stacked sections (not under the hero). */
+main > section + section {
+  border-top: 1px solid color-mix(in oklch, var(--line) 60%, transparent);
+}
+
 h1,
 h2,
 h3 {

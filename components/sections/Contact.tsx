@@ -8,7 +8,7 @@ import { profile } from "@/lib/data";
 // in-page form is ever requested — YAGNI for a personal portfolio.
 export default function Contact() {
   return (
-    <Section id="contact" className="py-24 sm:py-36">
+    <Section id="contact" className="py-20 sm:py-28">
       <Reveal>
         <p className="hud-label mb-6">Let&apos;s talk</p>
         <h2 className="max-w-[18ch] text-[clamp(2.25rem,6vw,4.5rem)] font-extrabold leading-[0.95] tracking-[-0.03em]">
@@ -43,7 +43,7 @@ export default function Contact() {
         </a>
       </Reveal>
 
-      <footer className="mt-24 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-8">
+      <footer className="mt-20 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-8">
         <span className="hud-label">© {profile.name}</span>
         <span className="hud-label">Built with Next.js · end of transmission</span>
       </footer>

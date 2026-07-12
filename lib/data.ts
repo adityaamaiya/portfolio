@@ -47,7 +47,8 @@ export interface Experience {
   period: string;
   location: string;
   summary: string;
-  highlights: string[];
+  /** Highlights grouped by area — keeps the section from reading as one long list. */
+  contributions: { area: string; points: string[] }[];
 }
 
 export interface SkillGroup {
@@ -105,15 +106,30 @@ export const experience: Experience = {
   location: "Bengaluru, India",
   summary:
     "Own high-impact platforms end-to-end: backend order systems and integrations, plus the marketing site and internal tooling frontends.",
-  highlights: [
-    "Built an order-management system integrating Shopify Admin APIs, Razorpay & Scogo webhooks, and Delhivery APIs to drive the full order lifecycle, logistics, and status-based workflows.",
-    "Implemented event-driven workflows with automated WhatsApp notifications on order status changes (delivery, installation), keeping operations in real-time sync.",
-    "Developed backend APIs and business logic on a modular architecture (controllers, validation, data-access layers) supporting order workflows and operational tools.",
-    "Improved platform reliability and cut CPU usage 375% → 255% by refactoring legacy code and adding error handling, fallbacks, and stability improvements.",
-    "Owned and led the Bolt.Earth marketing website — 15+ campaign landing pages plus core pages, handling all ongoing feature work and releases.",
-    "Lifted performance (Desktop 42 → 93, Mobile 48 → 83) and reached a 100 SEO score, contributing to 20X direct website revenue and 100X organic lead growth.",
-    "Revamped a charger-management frontend from MUI to Tailwind + Floating UI + TanStack Table, and built a reusable component library (tables, dialogs, panels, forms) for consistent, faster feature work.",
-    "Built Strapi-powered content systems so non-technical teams publish landing pages and case studies independently.",
+  contributions: [
+    {
+      area: "Backend & Systems",
+      points: [
+        "Built an order-management system integrating Shopify Admin APIs, Razorpay & Scogo webhooks, and Delhivery APIs to drive the full order lifecycle, logistics, and status-based workflows.",
+        "Implemented event-driven workflows with automated WhatsApp notifications on order status changes, keeping operations in real-time sync.",
+        "Developed backend APIs and business logic on a modular architecture (controllers, validation, data-access layers).",
+        "Cut CPU usage 375% → 255% by refactoring legacy code and adding error handling, fallbacks, and stability improvements.",
+      ],
+    },
+    {
+      area: "Web & Growth",
+      points: [
+        "Owned and led the Bolt.Earth marketing website — 15+ campaign landing pages plus core pages and all ongoing releases.",
+        "Lifted performance (Desktop 42 → 93, Mobile 48 → 83) and hit a 100 SEO score — contributing to 20× direct revenue and 100× organic lead growth.",
+      ],
+    },
+    {
+      area: "Platform & Tooling",
+      points: [
+        "Revamped a charger-management frontend (MUI → Tailwind + Floating UI + TanStack Table) and built a reusable component library — tables, dialogs, panels, forms.",
+        "Built Strapi-powered content systems so non-technical teams publish landing pages and case studies independently.",
+      ],
+    },
   ],
 };
 
