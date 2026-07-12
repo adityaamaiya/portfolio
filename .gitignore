@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local resume source (served copy lives in public/resume.pdf)
+My_Resume__Copy_.pdf

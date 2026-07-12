@@ -1,26 +1,156 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   Design tokens — see DESIGN.md. OKLCH throughout.
+   Dark is the default theme (:root). Light overrides via [data-theme="light"].
+   ============================================================ */
+
+:root,
+[data-theme="dark"] {
+  --bg: oklch(0.09 0 0);
+  --surface: oklch(0.13 0.008 294);
+  --surface-2: oklch(0.17 0.012 294);
+  --line: oklch(0.26 0.012 294);
+  --ink: oklch(0.97 0.004 294);
+  --muted: oklch(0.74 0.016 294);
+  --primary: oklch(0.64 0.19 294);
+  --primary-ink: oklch(0.1 0 0);
+  --accent: oklch(0.8 0.14 70);
+  --accent-ink: oklch(0.14 0 0);
+  color-scheme: dark;
 }
 
+[data-theme="light"] {
+  --bg: oklch(1 0 0);
+  --surface: oklch(0.975 0.004 294);
+  --surface-2: oklch(0.955 0.006 294);
+  --line: oklch(0.9 0.008 294);
+  --ink: oklch(0.2 0.012 294);
+  --muted: oklch(0.44 0.02 294);
+  --primary: oklch(0.52 0.2 294);
+  --primary-ink: oklch(1 0 0);
+  --accent: oklch(0.6 0.15 60);
+  --accent-ink: oklch(1 0 0);
+  color-scheme: light;
+}
+
+/* Map tokens + fonts into Tailwind's utility namespace (v4 @theme). */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-ink: var(--primary-ink);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+
+  --font-display: var(--font-bricolage);
+  --font-body: var(--font-hanken);
+  --font-mono: var(--font-martian);
+
+  /* Radii — engineered, not pill (DESIGN.md). */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Semantic z-index scale — no arbitrary 9999. */
+  --z-nav: 100;
+  --z-cursor: 200;
+  --z-overlay: 300;
+  --z-loader: 400;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--color-line);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Light-on-dark reads lighter; give it room (DESIGN.md). */
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  text-wrap: balance;
+  letter-spacing: -0.02em;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* HUD micro-label utility — mono, tracked, uppercase (used sparingly). */
+.hud-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Focus visibility — keyboard users (a11y). */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: color-mix(in oklch, var(--primary) 35%, transparent);
+  color: var(--ink);
+}
+
+/* Hide the native cursor only when the custom cursor is active (desktop, motion on).
+   The <CustomCursor> component adds `data-custom-cursor` to <html>. */
+@media (hover: hover) and (pointer: fine) {
+  html[data-custom-cursor] {
+    cursor: none;
+  }
+  html[data-custom-cursor] a,
+  html[data-custom-cursor] button {
+    cursor: none;
+  }
+}
+
+/* Scroll reveal — content is visible by default; JS hides below-fold items (pre-paint)
+   then reveals them. Never gates SSR/no-JS visibility. See components/ui/Reveal.tsx. */
+[data-reveal] {
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-reveal].reveal-pre {
+  opacity: 0;
+  transform: translateY(24px);
+}
+[data-reveal].reveal-pre.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Motion off: neutralize animations/transitions globally as a safety net.
+   Components also branch on useReducedMotion for correctness. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
