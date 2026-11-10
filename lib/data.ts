@@ -253,6 +253,7 @@ export const skillGroups: SkillGroup[] = [
     label: "Integrations",
     items: [
       { name: "Shopify Admin API", icon: "shopify" },
+      { name: "Shopflo", icon: "shopflo" },
       { name: "Razorpay", icon: "razorpay" },
       { name: "Delhivery", icon: "delhivery" },
       { name: "Gallabox", icon: "gallabox" },

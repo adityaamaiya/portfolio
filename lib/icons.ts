@@ -40,6 +40,7 @@ import {
   Truck,
   MessageCircle,
   Headset,
+  CreditCard,
   type LucideIcon,
 } from "lucide-react";
 
@@ -83,4 +84,5 @@ export const lucideSkillIcons: Record<string, LucideIcon> = {
   delhivery: Truck,
   gallabox: MessageCircle,
   scogo: Headset,
+  shopflo: CreditCard,
 };
