@@ -2,6 +2,7 @@ import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal, { RevealGroup } from "@/components/ui/Reveal";
 import { skillGroups } from "@/lib/data";
+import { skillIcons, lucideSkillIcons } from "@/lib/icons";
 
 export default function Skills() {
   return (
@@ -16,14 +17,32 @@ export default function Skills() {
               <span aria-hidden className="h-px flex-1 bg-line" />
             </div>
             <ul className="flex flex-wrap gap-2">
-              {g.items.map((s) => (
-                <li
-                  key={s}
-                  className="rounded-md border border-line bg-surface px-3 py-1.5 text-sm text-ink/90"
-                >
-                  {s}
-                </li>
-              ))}
+              {g.items.map((s) => {
+                const ic = s.icon ? skillIcons[s.icon] : undefined;
+                const Lucide = s.icon ? lucideSkillIcons[s.icon] : undefined;
+                return (
+                  <li
+                    key={s.name}
+                    className="group inline-flex items-center gap-2 rounded-md border border-line bg-surface px-3 py-1.5 text-sm text-ink/90 transition-colors hover:border-primary/40"
+                  >
+                    {ic ? (
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden
+                        className="size-3.5 shrink-0 fill-current text-muted transition-colors group-hover:text-primary"
+                      >
+                        <path d={ic.path} />
+                      </svg>
+                    ) : Lucide ? (
+                      <Lucide
+                        aria-hidden
+                        className="size-3.5 shrink-0 text-muted transition-colors group-hover:text-primary"
+                      />
+                    ) : null}
+                    {s.name}
+                  </li>
+                );
+              })}
             </ul>
           </Reveal>
         ))}

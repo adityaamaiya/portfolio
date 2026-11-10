@@ -51,9 +51,15 @@ export interface Experience {
   contributions: { area: string; points: string[] }[];
 }
 
+export interface Skill {
+  name: string;
+  /** Key into skillIcons (lib/icons.ts). Omit for skills with no brand logo. */
+  icon?: string;
+}
+
 export interface SkillGroup {
   label: string;
-  items: string[];
+  items: Skill[];
 }
 
 export interface Education {
@@ -204,17 +210,65 @@ export const projects: Project[] = [
 ];
 
 export const skillGroups: SkillGroup[] = [
-  { label: "Languages", items: ["JavaScript (ES6+)", "TypeScript"] },
-  { label: "Backend", items: ["Node.js", "Express.js", "REST APIs", "Webhooks"] },
-  { label: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "Material UI"] },
-  { label: "Databases", items: ["MongoDB"] },
+  {
+    label: "Languages",
+    items: [
+      { name: "JavaScript (ES6+)", icon: "js" },
+      { name: "TypeScript", icon: "ts" },
+    ],
+  },
+  {
+    label: "Backend",
+    items: [
+      { name: "Node.js", icon: "node" },
+      { name: "Express.js", icon: "express" },
+      { name: "REST APIs", icon: "rest" },
+      { name: "Webhooks", icon: "webhooks" },
+    ],
+  },
+  {
+    label: "Frontend",
+    items: [
+      { name: "React", icon: "react" },
+      { name: "Next.js", icon: "next" },
+      { name: "Tailwind CSS", icon: "tailwind" },
+      { name: "shadcn/ui", icon: "shadcn" },
+      { name: "Material UI", icon: "mui" },
+    ],
+  },
+  {
+    label: "Databases",
+    items: [{ name: "MongoDB", icon: "mongo" }],
+  },
+  {
+    label: "Cloud / AWS",
+    items: [
+      { name: "S3", icon: "s3" },
+      { name: "Parameter Store", icon: "param" },
+      { name: "Secrets Manager", icon: "secrets" },
+      { name: "Amplify", icon: "amplify" },
+    ],
+  },
   {
     label: "Integrations",
-    items: ["Shopify Admin API", "Razorpay", "Delhivery", "Gallabox", "Scogo"],
+    items: [
+      { name: "Shopify Admin API", icon: "shopify" },
+      { name: "Razorpay", icon: "razorpay" },
+      { name: "Delhivery", icon: "delhivery" },
+      { name: "Gallabox", icon: "gallabox" },
+      { name: "Scogo", icon: "scogo" },
+    ],
   },
   {
     label: "Tools",
-    items: ["Git", "Postman", "Vercel", "Chrome DevTools"],
+    items: [
+      { name: "Git", icon: "git" },
+      { name: "Postman", icon: "postman" },
+      { name: "Vercel", icon: "vercel" },
+      { name: "Figma", icon: "figma" },
+      { name: "Playwright", icon: "playwright" },
+      { name: "Chrome DevTools", icon: "chrome" },
+    ],
   },
 ];
 
